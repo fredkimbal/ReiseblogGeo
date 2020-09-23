@@ -5,10 +5,11 @@ require_once 'Libs/smarty-3.1.35/libs/Smarty.class.php';
 
 // Data Provider 
 require_once "Database/Database2.php";
+require_once "DataProvider/GeoProvider.php";
 
 
 // DTOs
-
+require_once "API/Geo/GeoJsonLine.php";
 
 
 
