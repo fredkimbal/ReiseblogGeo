@@ -8,6 +8,7 @@
                 <th>Datum</th>
                 <th>Distanz</th>
                 <th>&nbsp;</th>
+                
             </tr>
 
             {foreach from=$stages item=stage}

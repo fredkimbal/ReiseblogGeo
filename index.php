@@ -1,7 +1,11 @@
 <?PHP
 
+
 require_once 'Libs/smarty-3.1.35/libs/Smarty.class.php';
 
+// JPGraph für Höhenprofile
+require_once ('Libs/jpgraph-4.3.2/src/jpgraph.php');
+require_once ('Libs/jpgraph-4.3.2/src/jpgraph_line.php');
 
 // Data Provider 
 require_once "Database/Database2.php";
@@ -20,6 +24,7 @@ require_once 'API/APIFactory.php';
 
 // API Klassen
 require_once 'API/Geo/GeoAPI.php';
+require_once 'API/Admin/AdminAPI.php';
 
 
 error_reporting(E_ALL);

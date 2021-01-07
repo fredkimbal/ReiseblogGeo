@@ -25,6 +25,7 @@ class GeoJsonLine{
 
 class GeoJsonProperties{
     public $name = "";
+    public $type = 0;
 }
 
 class GeoJsonLineGeometry{

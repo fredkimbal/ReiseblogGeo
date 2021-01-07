@@ -2,16 +2,28 @@ var map;
 var layerGroup;
 var loadedTracks = [];
 
+var colors = [];
+colors.push("blue");
+colors.push("darkslateblue");
+colors.push("red");
+colors.push("green");
+colors.push("goldenrod");
+colors.push("darkcyan");
 
-function showMap (){
+
+function showMap (zoom){
     map = L.map('mapid').setView([47.05, 8.1], 13);
-
+    map.setZoom(zoom);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);   
 }
 
+/**
+ * Lädt einen einzelnen Track auf die Karte. Bereits geladene Tracks werden gelöscht
+ * @param {} id 
+ */
 function LoadSingleTrack(id){
 
     if (typeof layerGroup !== 'undefined') {
@@ -20,9 +32,9 @@ function LoadSingleTrack(id){
 
     layerGroup = L.layerGroup().addTo(map);
     
-    addTrackToMap(id);
+    loadTrackToMap(id);
     
-    map.flyTo(arr[0]);
+    centerMapToLastPoint(id)
 }
 
 function loadTrackToMap(id){
@@ -34,13 +46,13 @@ function loadTrackToMap(id){
         $.each(t.geometry.coordinates, function (i, v) {
             
                 arr.push(new L.LatLng(v[0], v[1]));                            
-                line = new L.Polyline(arr, {
-                color: "goldenrod",
+                
+            });
+            line = new L.Polyline(arr, {
+                color: colors[t.properties.type],
                 weight: 3,
                 opacity: 1,
-                smoothFactor: 1
-            });
-
+                smoothFactor: 1  
         });
             line.addTo(layerGroup);
 
@@ -54,13 +66,14 @@ function loadTrackToMap(id){
     });    
 }
 
+/**
+ * Fügt einen Track zur Karte. Bestehende Tracks werden nicht gelöscht
+ * @param int id ID des Tracks, welcher geladen werden soll. 
+ */
 function AddTrackToMap(id){
     if (typeof layerGroup === 'undefined') {
         layerGroup = L.layerGroup().addTo(map);
     }
-
-    
-
     loadTrackToMap(id);
 }
 
@@ -77,14 +90,18 @@ function loadTracksInBound(tourPart){
         });
 }
 
+/**
+ * Zentriert die Karte auf den letzten Punkt eines Tracks
+ * @param int trackID ID des Tracks
+ */
 function centerMapToLastPoint(trackID){
     
     $.get("https://luanaundandy.ch/ReiseblogGeo/REST/api/v1/Geo/LastPointInTrack/"+trackID,
         function (data) {
             map.flyTo(new L.LatLng(data.Lat, data.Long));
-        });
-
-    
+        });    
 }
+
+
 
 

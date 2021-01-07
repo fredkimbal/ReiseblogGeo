@@ -27,6 +27,7 @@
     <div class="l2 w3-col m2 s6"><span style="background-color: red">&nbsp;&nbsp;&nbsp;</span> Flugzeug</div>
     <div class="l2 w3-col m2 s6"><span style="background-color: green">&nbsp;&nbsp;&nbsp;</span> zu Fuss</div>
     <div class="l2 w3-col m2 s6"><span style="background-color: goldenrod">&nbsp;&nbsp;&nbsp;</span> Fahrrad</div>
+    <div class="l2 w3-col m2 s6"><span style="background-color: darkcyan">&nbsp;&nbsp;&nbsp;</span> Eisenbahn</div>
 </div>
 
 <p>&nbsp;</p>

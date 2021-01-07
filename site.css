@@ -1,1 +1,70 @@
-#mapid { height: 45%; }
+#mapid { 
+    height: 45%;
+    z-index: 500; 
+}
+
+#elevationchartmodal{
+    z-index: 501;
+}
+
+
+
+
+.th1
+{
+    width: 50%;
+}
+.th2
+{
+    width: 30%;
+}
+.th3
+{
+    width: 10%;
+}
+.th4
+{
+    width: 10%;
+}
+
+.td1
+{
+    width: 50%;
+}
+.td2
+{
+    width: 30%;
+}
+.td3
+{
+    width: 10%;
+}
+.td4
+{
+    width: 10%;
+}
+
+table.scroll thead tr:after {
+	content: '';
+	overflow-y: scroll;
+	visibility: hidden;
+}
+table.scroll thead th {
+	flex: 1 auto;
+	display: block;
+}
+table.scroll tbody {
+	display: block;
+	width: 100%;
+	overflow-y: auto;
+	height: auto;
+	max-height: 200px;
+}
+table.scroll thead tr,
+table.scroll tbody tr {
+	display: flex;
+}
+table.scroll tbody tr td {
+	flex: 1 auto;
+	word-wrap: break;
+}
