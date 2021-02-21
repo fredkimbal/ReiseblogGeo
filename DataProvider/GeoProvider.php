@@ -4,9 +4,9 @@ class GeoProvider{
 
     public function GetTourStageLocation($tourPart){
         $sql = "SELECT ID, 
-                       DATE_FORMAT (TrackDate, '%d.%m.%Y') as TrackDate, 
+                       DATE_FORMAT(TrackDate, '%d.%m.%Y') as TrackDate, 
                        Distance, 
-                       CONCAT(DATE_FORMAT (TrackDate, '%d.%m.%Y'), ' - ' , Location) AS Caption
+                       CONCAT(DATE_FORMAT(TrackDate, '%d.%m.%Y'), ' - ' , Location) AS Caption
                 FROM onTour_GPX WHERE TourPart = $tourPart";
 
         $db = new Database();
