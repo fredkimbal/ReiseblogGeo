@@ -68,3 +68,8 @@ table.scroll tbody tr td {
 	flex: 1 auto;
 	word-wrap: break;
 }
+
+
+.leaflet-container.crosshair-cursor-enabled {
+    cursor:crosshair;
+}

@@ -99,6 +99,24 @@ class GeoProvider{
     }
 
 
+    public function SetBoundries($trackID){
+        
+        $db = new Database();
+
+        $sql = "UPDATE onTour_GPX SET LatMin = (SELECT Min(CONVERT(`Lat`, DECIMAL (15,10))) FROM onTour_GPXTrackPoints WHERE TrackID = $trackID) WHERE ID = $trackID";
+        $db->iquery($sql);
+
+        $sql = "UPDATE onTour_GPX SET LatMax = (SELECT Max(CONVERT(`Lat`, DECIMAL (15,10))) FROM onTour_GPXTrackPoints WHERE TrackID = $trackID) WHERE ID = $trackID";
+        $db->iquery($sql);
+
+        $sql = "UPDATE onTour_GPX SET LongMin = (SELECT Min(CONVERT(`Long`, DECIMAL (15,10))) FROM onTour_GPXTrackPoints WHERE TrackID = $trackID) WHERE ID = $trackID";
+        $db->iquery($sql);
+
+        $sql = "UPDATE onTour_GPX SET LongMax = (SELECT Max(CONVERT(`Long`, DECIMAL (15,10))) FROM onTour_GPXTrackPoints WHERE TrackID = $trackID) WHERE ID = $trackID";
+        $db->iquery($sql);
+    }
+
+
 }
 
 ?>

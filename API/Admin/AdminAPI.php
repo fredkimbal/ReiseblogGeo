@@ -17,7 +17,38 @@ class AdminAPI extends SmartyAPI {
         $smarty->display("UploadGUI.tpl");
     }
 
+    public function CoordinatePicker(){
 
+        $smarty = $this->createSmarty("Admin");
+
+        $geoProvider = new GeoProvider();
+        $smarty->assign("tourparts", $geoProvider->GetTourParts());
+
+        $smarty->display("CoordinatePicker.tpl");
+
+    }
+
+
+    public function SaveTrack(){        
+
+        $destination = filter_input(INPUT_POST, 'destination');
+        $tourpart = filter_input(INPUT_POST, 'tourpart');
+        $tracktype = filter_input(INPUT_POST, 'tracktype');
+        
+        $track = filter_input_array(INPUT_POST)['geometry']['coordinates'];
+        
+        $geoProvider = new GeoProvider();
+        
+        $date = new DateTime();
+        
+        $trackID = $geoProvider->InsertTrack($date->format('Y-m-d'), 0, 0, $tourpart, $destination, $tracktype);
+
+        foreach($track as $t){
+            $geoProvider->InsertTrackPoint($t[1], $t[0], 0, 0, $trackID);
+        }
+       
+        $geoProvider->SetBoundries($trackID);
+    }
 
     public function UploadStarted(){
         $destination_path = getcwd().DIRECTORY_SEPARATOR . "GpxTemp" . DIRECTORY_SEPARATOR;
@@ -115,14 +146,14 @@ class AdminAPI extends SmartyAPI {
         $gpxProvider->UpdateDistance($trackID, $distance);
 
 
-echo $distance;
+        echo $distance;
         
  
         // sleep(1);
-echo "
-        <script language='javascript' type='text/javascript'>
-        window.top.window.stopUpload(". $result. ");
-     </script>   ";
+        echo "
+            <script language='javascript' type='text/javascript'>
+            window.top.window.stopUpload(". $result. ");
+        </script>   ";
 
     }
 
